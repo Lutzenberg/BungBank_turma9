@@ -26,6 +26,8 @@ public class CadastroPage {
 
     public String btnRegistrar = "//*[@id=\"__next\"]/div/div[2]/div/div[1]/form/div[3]/button[2]";
 
+    public String btnFechar = "/html[1]/body[1]/div[1]/div[1]/div[3]/div[1]/div[2]/a[1]";
+
     public void preecherValorPorXpath(String elemento, String valor) {
         driver.findElement(By.xpath(elemento)).sendKeys(valor);
     }
