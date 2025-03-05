@@ -3,10 +3,14 @@ package page;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class CadastroPage {
 
     WebDriver driver;
+    WebDriverWait wait;
 
     public CadastroPage(WebDriver driver) {
         this.driver = driver;
@@ -20,7 +24,7 @@ public class CadastroPage {
 
     public String campoConfirmacaoSenha = "//*[@id=\"__next\"]/div/div[2]/div/div[2]/form/div[5]/div/input";
 
-    public String btnContaComSaldoToggle = "//*[@id=\"toggleAddBalance\"]";
+    public String btnContaComSaldoToggle = "//*[@id=\"__next\"]/div/div[2]/div/div[2]/form/div[6]/label";
 
     public String btnCadastrar = "//*[@id=\"__next\"]/div/div[2]/div/div[2]/form/button";
 
@@ -33,10 +37,13 @@ public class CadastroPage {
     }
 
     public void clicarPorXpath(String elemento) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(d -> d.findElement(By.xpath(elemento)).isDisplayed());
         driver.findElement(By.xpath(elemento)).click();
     }
 
-    public void validarCotaCriaComucesso(){
+    public void validarContaCriadaComSucesso() {
         Assert.assertTrue(driver.getPageSource().contains("foi criada com sucesso"));
     }
+
 }
