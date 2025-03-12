@@ -32,10 +32,10 @@ public class TesteSaldoInicial {
     public void testeSaldoInicial() {
 
         cadastroPage.clicarPorXpath(cadastroPage.btnRegistrar);
-        cadastroPage.preecherValorPorXpath(cadastroPage.campoEmail, "lut@gmail.com");
-        cadastroPage.preecherValorPorXpath(cadastroPage.campoNome, "Miguel Machado");
-        cadastroPage.preecherValorPorXpath(cadastroPage.campoSenha, "123456");
-        cadastroPage.preecherValorPorXpath(cadastroPage.campoConfirmacaoSenha, "123456");
+        cadastroPage.preencherValorPorXpath(cadastroPage.campoEmail, "lut@gmail.com");
+        cadastroPage.preencherValorPorXpath(cadastroPage.campoNome, "Miguel Machado");
+        cadastroPage.preencherValorPorXpath(cadastroPage.campoSenha, "123456");
+        cadastroPage.preencherValorPorXpath(cadastroPage.campoConfirmacaoSenha, "123456");
         cadastroPage.clicarPorXpath(cadastroPage.btnContaComSaldoToggle);
         cadastroPage.clicarPorXpath(cadastroPage.btnCadastrar);
         cadastroPage.validarContaCriadaComSucesso();

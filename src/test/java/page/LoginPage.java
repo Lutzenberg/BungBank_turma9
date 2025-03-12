@@ -3,7 +3,6 @@ package page;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
@@ -34,8 +33,15 @@ public class LoginPage {
 
     public void validarLogin() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(d ->d.getCurrentUrl().contains("/home"));
+        wait.until(d -> d.getCurrentUrl().contains("/home"));
         Assert.assertTrue(driver.getCurrentUrl().contains("http://localhost:3000/home"));
+    }
+
+    public void fazerLogin(String email, String senha) {
+        preecherValorPorXpath(campEmail, email);
+        preecherValorPorXpath(campSenha, senha);
+        clicarPorXpath(btnAcessar);
+        validarLogin();
     }
 
 }

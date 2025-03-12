@@ -10,7 +10,8 @@ import java.time.Duration;
 public class CadastroPage {
 
     WebDriver driver;
-    WebDriverWait wait;
+    public String conta;
+    public String digito;
 
     public CadastroPage(WebDriver driver) {
         this.driver = driver;
@@ -32,7 +33,11 @@ public class CadastroPage {
 
     public String btnFechar = "/html[1]/body[1]/div[1]/div[1]/div[3]/div[1]/div[2]/a[1]";
 
-    public void preecherValorPorXpath(String elemento, String valor) {
+    public String msgContaCriada = "//*[@id=\"modalText\"]";
+
+
+    public void preencherValorPorXpath(String elemento, String valor) {
+        driver.findElement(By.xpath(elemento)).clear();
         driver.findElement(By.xpath(elemento)).sendKeys(valor);
     }
 
@@ -46,4 +51,28 @@ public class CadastroPage {
         Assert.assertTrue(driver.getPageSource().contains("foi criada com sucesso"));
     }
 
+    public void cadatrarNovaConta(String email, String nome, String senha) {
+        clicarPorXpath(btnRegistrar);
+        preencherValorPorXpath(campoEmail, email);
+        preencherValorPorXpath(campoNome, nome);
+        preencherValorPorXpath(campoSenha, senha);
+        preencherValorPorXpath(campoConfirmacaoSenha, (senha));
+        clicarPorXpath(btnContaComSaldoToggle);
+        clicarPorXpath(btnCadastrar);
+        validarContaCriadaComSucesso();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(d -> d.findElement(By.xpath(msgContaCriada)).isDisplayed());
+        String mensagemCadastro = driver.findElement(By.xpath(msgContaCriada)).getText();
+        String[] numConta = mensagemCadastro.split("conta|foi");
+        String txtContaEdigito = numConta[1].trim();
+        String[] contaDigito = txtContaEdigito.split("-");
+        this.conta = contaDigito[0];
+        this.digito = contaDigito[1];
+        clicarPorXpath(btnFechar);
+
+    }
+
 }
+
+
+
