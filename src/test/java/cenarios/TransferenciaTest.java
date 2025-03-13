@@ -43,6 +43,7 @@ public class TransferenciaTest {
         String conta2 = cadastroPage.conta;
         String digito2 = cadastroPage.digito;
         System.out.println(conta2 + digito2);
+
         loginPage.fazerLogin("teste@gmail.com", "123456");
         homePage.clicarPorXpath(homePage.btnTransferencia);
         transferenciaPage.preencherValorPorXpath(transferenciaPage.campoNumeroDaConta, conta2);
@@ -51,6 +52,17 @@ public class TransferenciaTest {
         transferenciaPage.preencherValorPorXpath(transferenciaPage.campoDescricao, "QA Academy");
         transferenciaPage.clicarPorXpath(transferenciaPage.btnTransferirAgora);
         transferenciaPage.transferenciaFeitaComSucesso();
+    }
+
+    @Test
+    public void testeTransferenciaComErro() {
+        cadastroPage.cadatrarNovaConta("teste@gmail.com", "Jose", "123456");
+        loginPage.fazerLogin("teste@gmail.com", "123456");
+        homePage.clicarPorXpath(homePage.btnTransferencia);
+        transferenciaPage.preencherValorPorXpath(transferenciaPage.campoValorTransferencia, "1000.01");
+        transferenciaPage.preencherValorPorXpath(transferenciaPage.campoDescricao, "Teste");
+        transferenciaPage.clicarPorXpath(transferenciaPage.btnTransferirAgora);
+        transferenciaPage.validarMenssagemDeErroNaTransferencia();
     }
 
     @After
