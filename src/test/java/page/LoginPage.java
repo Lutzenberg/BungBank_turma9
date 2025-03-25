@@ -41,7 +41,7 @@ public class LoginPage {
         preecherValorPorXpath(campEmail, email);
         preecherValorPorXpath(campSenha, senha);
         clicarPorXpath(btnAcessar);
-        validarLogin();
+        clicarPorXpath(btnAcessar);
     }
 
 }

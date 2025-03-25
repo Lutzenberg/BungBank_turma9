@@ -1,5 +1,6 @@
 package cenarios;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
@@ -24,8 +25,9 @@ public class TesteSaldoInicial {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
         loginPage = new LoginPage(driver);
         cadastroPage = new CadastroPage(driver);
-        driver.get("http://localhost:3000/");
         homePage = new HomePage(driver);
+
+        driver.get("http://localhost:3000/");
     }
 
     @Test
@@ -47,5 +49,9 @@ public class TesteSaldoInicial {
         loginPage.validarLogin();
 
         homePage.validarSaldo("Saldo em conta R$ 1.000,00");
+    }
+    @After
+    public void after() {
+        driver.quit();
     }
 }
